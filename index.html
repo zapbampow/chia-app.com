@@ -259,7 +259,6 @@
 
   /* ---------- tweak states ---------- */
   body.twk-hide-proof #hero-proof { display:none; }
-  body.twk-hide-company #foot-company { display:none; }
   body.twk-flat-head #hero-grad { background:none; -webkit-text-fill-color:initial; color:var(--text); }
   body.twk-no-tilt .phone, body.twk-no-tilt .phone-hero { transform:none; }
 
@@ -580,13 +579,7 @@
           <a href="#science">The science</a>
           <a href="#privacy">Privacy</a>
           <a href="#download">Download</a>
-        </div>
-        <div class="foot-col" id="foot-company">
-          <h5>Company</h5>
-          <a href="#">About</a>
-          <a href="#">Blog</a>
-          <a href="#">Support</a>
-          <a href="#">Contact</a>
+          <a href="support.html">Support</a>
         </div>
         <div class="foot-col">
           <h5>Legal</h5>
@@ -617,14 +610,12 @@
   /* ---------- Tweaks ---------- */
   const TWEAKS = /*EDITMODE-BEGIN*/{
     "showSocialProof": false,
-    "showFooterCompany": false,
     "rainbowHeadline": true,
     "phoneTilt": true
   }/*EDITMODE-END*/;
 
   function applyTweaks(t) {
     document.body.classList.toggle('twk-hide-proof', !t.showSocialProof);
-    document.body.classList.toggle('twk-hide-company', !t.showFooterCompany);
     document.body.classList.toggle('twk-flat-head', !t.rainbowHeadline);
     document.body.classList.toggle('twk-no-tilt', !t.phoneTilt);
   }
@@ -637,8 +628,6 @@
     { key: 'rainbowHeadline',   label: 'Rainbow headline' },
     { section: 'Layout' },
     { key: 'phoneTilt',         label: 'Tilt the phones' },
-    { section: 'Footer' },
-    { key: 'showFooterCompany', label: 'Company column' },
   ];
 
   let panelEl = null;
