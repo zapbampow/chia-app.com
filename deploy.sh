@@ -1,1 +1,1 @@
-rsync -av --delete --exclude='.git' --exclude='.gitignore' --exclude='deploy.sh' /home/clayton/chia-app.com /var/www/chia-app.com/
+rsync -av --delete --exclude='.git' --exclude='.gitignore' --exclude='deploy.sh' /home/clayton/chia-app.com/ /var/www/chia-app.com/
