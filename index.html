@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chia — Eat the rainbow, every day</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:#fefde8; --bg-warm:#f6f4e0; --card:#f2f1d4; --card-2:#fffffb;
+    --text:#3e5b3f; --muted:#537954; --soft:#6b8169; --faint:#8a9a88;
+    --line:#e6e6c8;
+    --red:#f26849; --yellow:#f2cf63; --green:#9cbf4e; --teal:#4ac8c7; --whitebrown:#fffffb;
+    --header-green:#a9c859; --green-faded:#cedfaa;
+    --av-500:#679869; --av-600:#537954; --av-700:#3e5b3f; --av-800:#293d2a; --av-900:#151e15;
+    --acc-yellow:#ffdf68; --acc-green:#56872e; --orange:#e87048;
+    --e1:0 1px 3px rgba(62,91,63,.12);
+    --e2:0 6px 16px rgba(62,91,63,.16);
+    --e3:0 22px 44px rgba(62,91,63,.22);
+    --spring:cubic-bezier(.34,1.56,.64,1);
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:"Poppins",system-ui,sans-serif; background:var(--bg); color:var(--text);
+    -webkit-font-smoothing:antialiased; overflow-x:hidden; line-height:1.5;
+  }
+  a { color:inherit; text-decoration:none; }
+  img { display:block; max-width:100%; }
+  .wrap { max-width:1140px; margin:0 auto; padding:0 32px; }
+
+  /* ---------- buttons ---------- */
+  .btn { font-family:inherit; font-weight:600; cursor:pointer; border:none; display:inline-flex;
+    align-items:center; gap:10px; transition:transform .18s var(--spring), box-shadow .18s ease; }
+  .btn:active { transform:scale(.95); }
+  .btn-primary { background:var(--av-500); color:#fff; padding:15px 28px; border-radius:9999px;
+    font-size:16px; box-shadow:0 6px 16px rgba(62,91,63,.24); }
+  .btn-primary:hover { box-shadow:0 10px 24px rgba(62,91,63,.30); }
+  .btn-ghost { color:var(--text); padding:15px 20px; font-size:16px; border-radius:9999px; }
+  .btn-ghost:hover { background:var(--card); }
+  .store-btn { background:var(--av-800); color:#f0f5f0; padding:11px 22px 11px 18px; border-radius:18px;
+    display:inline-flex; align-items:center; gap:12px; transition:transform .18s var(--spring), box-shadow .2s; box-shadow:var(--e2); }
+  .store-btn:hover { box-shadow:var(--e3); transform:translateY(-2px); }
+  .store-btn:active { transform:scale(.96); }
+  .store-btn .glyph { width:30px; height:30px; flex:none; }
+  .store-btn .lines { display:flex; flex-direction:column; line-height:1.15; }
+  .store-btn .lines small { font-size:11px; font-weight:500; color:#a4c1a5; letter-spacing:.02em; }
+  .store-btn .lines b { font-size:17px; font-weight:700; letter-spacing:-.01em; }
+  .store-btn.light { background:var(--acc-yellow); color:var(--av-800); box-shadow:0 0 0 2px rgba(255,223,104,.45), 0 10px 22px rgba(0,0,0,.22); }
+  .store-btn.light .lines small { color:#7a6a1f; }
+
+  /* ---------- nav ---------- */
+  header.nav { position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.1) blur(8px);
+    background:rgba(254,253,232,.82); border-bottom:1px solid transparent; transition:border-color .3s, box-shadow .3s; }
+  header.nav.scrolled { border-color:var(--line); box-shadow:0 2px 14px rgba(62,91,63,.07); }
+  .nav-inner { display:flex; align-items:center; justify-content:space-between; height:72px; }
+  .brand { display:flex; align-items:center; gap:11px; font-weight:800; font-size:23px; letter-spacing:-.02em; }
+  .brand .mark { width:40px; height:40px; border-radius:50%; background:rgba(156,191,78,.30);
+    border:2px solid var(--green); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 0 2px var(--acc-yellow), 0 0 0 4px var(--acc-green); }
+  .brand .mark img { width:30px; height:30px; }
+  .nav-links { display:flex; align-items:center; gap:30px; font-size:15px; font-weight:500; color:var(--muted); }
+  .nav-links a { transition:color .2s; }
+  .nav-links a:hover { color:var(--text); }
+  .nav-cta { background:var(--av-500); color:#fff; padding:10px 22px; border-radius:9999px; font-weight:600; font-size:14px;
+    box-shadow:0 4px 12px rgba(62,91,63,.20); transition:transform .18s var(--spring); }
+  .nav-cta:active { transform:scale(.95); }
+
+  /* ---------- hero ---------- */
+  .hero { position:relative; padding:60px 0 40px; }
+  .hero-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:36px; align-items:center; }
+  .eyebrow { display:inline-flex; align-items:center; gap:8px; background:var(--card); color:var(--muted);
+    padding:8px 16px; border-radius:9999px; font-size:13.5px; font-weight:600; box-shadow:var(--e1); }
+  .hero h1 { font-size:clamp(42px,6vw,68px); line-height:1.0; font-weight:800; letter-spacing:-.035em; margin:20px 0 0; }
+  .hero h1 .grad { background:linear-gradient(95deg,var(--red),var(--yellow) 32%,var(--green) 60%,var(--teal));
+    -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .lede { font-size:18.5px; line-height:1.6; color:var(--muted); margin-top:22px; max-width:480px; }
+  .cta-row { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:30px; }
+  .proof { display:flex; align-items:center; gap:12px; margin-top:24px; font-size:13.5px; color:var(--faint); font-weight:500; }
+  .stars { color:var(--yellow); letter-spacing:2px; font-size:15px; }
+
+  /* hero visual */
+  .hero-visual { position:relative; display:flex; align-items:center; justify-content:center; min-height:540px; }
+  .blob { position:absolute; width:430px; height:430px; border-radius:46% 54% 60% 40% / 54% 44% 56% 46%;
+    background:radial-gradient(circle at 32% 28%, var(--green-faded), var(--header-green));
+    top:50%; left:50%; transform:translate(-50%,-50%); z-index:0; }
+  .blob.orange { width:240px; height:240px; background:radial-gradient(circle at 40% 35%, #f0a07f, var(--orange));
+    border-radius:54% 46% 40% 60% / 44% 56% 44% 56%; top:78%; left:74%; opacity:.9; filter:blur(.2px); }
+  .phone-hero { position:relative; z-index:2; width:320px; border-radius:9.2%/4.45%;
+    filter:drop-shadow(0 28px 46px rgba(41,61,42,.34)); transform:rotate(-2deg); }
+  .float-card { position:absolute; z-index:3; background:var(--card-2); border-radius:20px; padding:14px 16px;
+    box-shadow:var(--e3); }
+  .float-rainbow { bottom:54px; left:-6px; transform:rotate(-3deg); }
+  .float-rainbow .t { font-size:11.5px; color:var(--faint); font-weight:600; text-transform:uppercase; letter-spacing:.06em; }
+  .dots { display:flex; gap:7px; margin-top:9px; }
+  .dots i { width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    color:#fff; font-size:13px; font-weight:700; font-style:normal; box-shadow:inset 0 0 0 1px rgba(0,0,0,.06); }
+  .float-streak { top:40px; right:-10px; transform:rotate(3deg); display:flex; align-items:center; gap:10px; }
+  .float-streak .big { font-size:26px; font-weight:800; letter-spacing:-.02em; line-height:1; }
+  .float-streak .lbl { font-size:11.5px; color:var(--faint); font-weight:600; }
+  .mascot-peek { position:absolute; z-index:4; width:96px; bottom:-6px; left:64px; transform:rotate(-6deg);
+    filter:drop-shadow(0 10px 14px rgba(41,61,42,.22)); }
+
+  /* rainbow divider */
+  .rainbow-strip { display:flex; height:8px; max-width:1140px; margin:0 auto; }
+  .rainbow-strip > span { flex:1; }
+
+  /* ---------- section scaffolding ---------- */
+  section { position:relative; }
+  .kicker { display:inline-block; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.12em;
+    color:var(--av-500); }
+  .sec-head { text-align:center; max-width:680px; margin:0 auto; }
+  .sec-head h2 { font-size:clamp(30px,4.4vw,46px); font-weight:800; letter-spacing:-.03em; line-height:1.04; margin-top:12px; }
+  .sec-head p { font-size:18px; color:var(--muted); margin-top:16px; line-height:1.6; }
+
+  /* audience pills */
+  .audience { padding:64px 0 8px; }
+  .pill-row { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:30px; }
+  .apill { display:flex; align-items:center; gap:9px; background:var(--card-2); border:1px solid var(--green-faded);
+    padding:12px 20px; border-radius:9999px; font-weight:600; font-size:16px; box-shadow:var(--e1); }
+  .apill .dot { width:13px; height:13px; border-radius:50%; }
+
+  /* ---------- science dark band ---------- */
+  .dark { background:var(--av-900); color:#f0f5f0; border-radius:36px; padding:60px 56px; position:relative; overflow:hidden; }
+  .dark .glow { position:absolute; width:480px; height:480px; border-radius:50%;
+    background:radial-gradient(circle, rgba(169,200,89,.30), transparent 70%); top:-200px; right:-140px; }
+  .dark .glow.b { background:radial-gradient(circle, rgba(232,112,72,.26), transparent 70%); top:auto; bottom:-220px; left:-160px; right:auto; }
+  .dark .kicker { color:var(--header-green); position:relative; }
+  .dark h2 { font-size:clamp(30px,4.4vw,46px); font-weight:800; letter-spacing:-.03em; line-height:1.05; margin-top:12px; position:relative; }
+  .dark h2 .accent { color:var(--yellow); }
+  .dark .dp { color:#c2d6c3; font-size:18px; line-height:1.6; margin-top:18px; max-width:560px; position:relative; }
+  .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:40px; position:relative; }
+  .stat { background:rgba(240,245,240,.06); border:1px solid rgba(240,245,240,.13); border-radius:24px; padding:26px 24px; }
+  .stat .n { font-size:46px; font-weight:800; color:#fff; letter-spacing:-.03em; line-height:1; }
+  .stat .n .u { font-size:20px; color:var(--header-green); font-weight:700; }
+  .stat .l { font-size:14px; color:#a4c1a5; margin-top:10px; line-height:1.45; }
+
+  /* ---------- feature rows ---------- */
+  .features { padding:40px 0 8px; }
+  .feature { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; padding:54px 0; }
+  .feature.flip .f-text { order:2; }
+  .feature.flip .f-visual { order:1; }
+  .f-text .num { font-size:14px; font-weight:700; color:var(--av-500); letter-spacing:.04em; }
+  .f-text h3 { font-size:clamp(28px,3.6vw,40px); font-weight:800; letter-spacing:-.025em; line-height:1.06; margin-top:10px; }
+  .f-text p { font-size:18px; color:var(--muted); line-height:1.62; margin-top:18px; max-width:460px; }
+  .f-list { list-style:none; margin-top:22px; display:flex; flex-direction:column; gap:12px; }
+  .f-list li { display:flex; align-items:flex-start; gap:12px; font-size:16px; color:var(--text); font-weight:500; }
+  .f-list .tick { width:26px; height:26px; flex:none; border-radius:50%; background:var(--green-faded);
+    display:flex; align-items:center; justify-content:center; color:var(--av-600); font-size:14px; font-weight:800; margin-top:1px; }
+
+  .f-visual { position:relative; display:flex; align-items:center; justify-content:center; min-height:560px; }
+  .stage { position:absolute; width:380px; height:380px; border-radius:42% 58% 58% 42% / 50% 50% 50% 50%;
+    top:50%; left:50%; transform:translate(-50%,-50%); z-index:0; }
+  .stage.green { background:radial-gradient(circle at 34% 30%, var(--green-faded), var(--header-green)); }
+  .stage.yellow { background:radial-gradient(circle at 34% 30%, #fbe6a6, var(--yellow)); }
+  .stage.teal { background:radial-gradient(circle at 34% 30%, #b6e9e8, var(--teal)); }
+  .stage.red { background:radial-gradient(circle at 34% 30%, #f6a88f, var(--red)); }
+  .stage.orange { background:radial-gradient(circle at 34% 30%, #f3b095, var(--orange)); }
+  .phone { position:relative; z-index:2; width:300px; border-radius:9.2%/4.45%;
+    filter:drop-shadow(0 26px 44px rgba(41,61,42,.30)); }
+  .phone.tilt-l { transform:rotate(-3deg); }
+  .phone.tilt-r { transform:rotate(3deg); }
+  .chip-float { position:absolute; z-index:3; background:var(--card-2); border-radius:16px; padding:11px 15px;
+    box-shadow:var(--e3); display:flex; align-items:center; gap:10px; font-weight:700; font-size:15px; }
+  .chip-float .emoji { font-size:22px; }
+  .chip-float small { display:block; font-size:11px; color:var(--faint); font-weight:600; }
+
+  /* ---------- small feature grid ---------- */
+  .grid-feats { padding:56px 0; }
+  .cards3 { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:48px; }
+  .fcard { background:var(--card); border-radius:28px; padding:34px 30px; box-shadow:var(--e1);
+    transition:transform .25s var(--spring), box-shadow .25s ease; }
+  .fcard:hover { transform:translateY(-6px); box-shadow:var(--e2); }
+  .fcard .ic { width:62px; height:62px; border-radius:18px; display:flex; align-items:center; justify-content:center;
+    font-size:30px; box-shadow:var(--e1); }
+  .fcard h4 { font-size:23px; font-weight:700; letter-spacing:-.02em; margin-top:22px; }
+  .fcard p { font-size:15.5px; color:var(--muted); line-height:1.6; margin-top:12px; }
+
+  /* ---------- privacy strip ---------- */
+  .privacy { padding:8px 0 64px; }
+  .privacy-band { background:var(--card-2); border:1px solid var(--green-faded); border-radius:32px;
+    padding:40px 48px; display:flex; align-items:center; gap:32px; box-shadow:var(--e1); }
+  .privacy-band .lock { width:84px; height:84px; flex:none; border-radius:24px; background:var(--green-faded);
+    display:flex; align-items:center; justify-content:center; font-size:40px; }
+  .privacy-band h3 { font-size:28px; font-weight:800; letter-spacing:-.02em; }
+  .privacy-band p { font-size:17px; color:var(--muted); margin-top:8px; line-height:1.55; max-width:620px; }
+
+  /* ---------- final CTA ---------- */
+  .final { padding:8px 0 80px; }
+  .final .dark { display:grid; grid-template-columns:1.2fr .8fr; gap:32px; align-items:center; }
+  .final h2 { font-size:clamp(34px,5vw,54px); }
+  .final .dp { font-size:19px; }
+  .final-cta { display:flex; gap:14px; flex-wrap:wrap; margin-top:30px; position:relative; }
+  .final .mascot-big { position:relative; justify-self:center; }
+  .final .mascot-big img { width:230px; filter:drop-shadow(0 22px 30px rgba(0,0,0,.34)); }
+  .confetti { position:absolute; width:11px; height:11px; border-radius:3px; opacity:.9; }
+
+  /* ---------- footer ---------- */
+  footer { padding:48px 0 56px; border-top:1px solid var(--line); }
+  .foot-inner { display:flex; align-items:flex-start; justify-content:space-between; gap:40px; flex-wrap:wrap; }
+  .foot-brand { max-width:300px; }
+  .foot-brand p { color:var(--soft); font-size:14px; margin-top:14px; line-height:1.6; }
+  .foot-cols { display:flex; gap:64px; flex-wrap:wrap; }
+  .foot-col h5 { font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--faint); font-weight:700; }
+  .foot-col a { display:block; color:var(--muted); font-size:15px; margin-top:12px; font-weight:500; transition:color .2s; }
+  .foot-col a:hover { color:var(--text); }
+  .foot-bottom { display:flex; align-items:center; justify-content:space-between; margin-top:40px; padding-top:24px;
+    border-top:1px solid var(--line); font-size:13px; color:var(--faint); flex-wrap:wrap; gap:12px; }
+
+  /* ---------- reveal ---------- */
+  .reveal { opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s var(--spring); }
+  .reveal.in { opacity:1; transform:none; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:920px) {
+    .hero-grid { grid-template-columns:1fr; gap:8px; }
+    .hero-visual { min-height:460px; margin-top:8px; }
+    .nav-links a:not(.nav-cta) { display:none; }
+    .feature { grid-template-columns:1fr; gap:20px; padding:40px 0; }
+    .feature.flip .f-text { order:1; } .feature.flip .f-visual { order:2; }
+    .f-visual { min-height:480px; }
+    .f-text p, .lede, .f-text { text-align:left; }
+    .stats { grid-template-columns:1fr; }
+    .cards3 { grid-template-columns:1fr; }
+    .final .dark { grid-template-columns:1fr; }
+    .final .mascot-big { display:none; }
+    .privacy-band { flex-direction:column; text-align:center; }
+    .dark { padding:44px 28px; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .reveal { opacity:1 !important; transform:none !important; }
+    html { scroll-behavior:auto; }
+  }
+
+  /* ---------- tweak states ---------- */
+  body.twk-hide-proof #hero-proof { display:none; }
+  body.twk-hide-company #foot-company { display:none; }
+  body.twk-flat-head #hero-grad { background:none; -webkit-text-fill-color:initial; color:var(--text); }
+  body.twk-no-tilt .phone, body.twk-no-tilt .phone-hero { transform:none; }
+
+  /* ---------- tweaks panel ---------- */
+  .twk-panel { position:fixed; right:16px; bottom:16px; z-index:2147483646; width:248px;
+    background:rgba(250,249,236,.82); color:var(--text);
+    -webkit-backdrop-filter:blur(22px) saturate(150%); backdrop-filter:blur(22px) saturate(150%);
+    border:.5px solid rgba(255,255,255,.7); border-radius:16px;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset, 0 14px 40px rgba(41,61,42,.22);
+    font-family:"Poppins",system-ui,sans-serif; overflow:hidden; }
+  .twk-hd { display:flex; align-items:center; justify-content:space-between; padding:12px 10px 12px 16px; }
+  .twk-hd b { font-size:13px; font-weight:700; letter-spacing:-.01em; }
+  .twk-x { border:0; background:transparent; color:var(--faint); width:24px; height:24px; border-radius:7px;
+    cursor:pointer; font-size:13px; line-height:1; }
+  .twk-x:hover { background:rgba(62,91,63,.08); color:var(--text); }
+  .twk-body { padding:2px 16px 16px; display:flex; flex-direction:column; gap:11px; }
+  .twk-sect { font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--faint); padding:8px 0 0; }
+  .twk-sect:first-child { padding-top:0; }
+  .twk-trow { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .twk-trow span { font-size:13px; font-weight:500; color:var(--muted); }
+  .twk-tog { position:relative; width:38px; height:22px; border:0; border-radius:999px; flex:none;
+    background:var(--green-faded); transition:background .18s var(--spring); cursor:pointer; padding:0; }
+  .twk-tog[data-on="1"] { background:var(--av-500); }
+  .twk-tog i { position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%;
+    background:#fff; box-shadow:0 1px 3px rgba(41,61,42,.3); transition:transform .18s var(--spring); }
+  .twk-tog[data-on="1"] i { transform:translateX(16px); }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <span class="mark"><img src="assets/chia-mascot.png" alt="Chia mascot" /></span>
+      Chia
+    </a>
+    <nav class="nav-links">
+      <a href="#science">The science</a>
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#download" class="nav-cta">Get the app</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal in">
+      <span class="eyebrow">🌱 Nutrition meets kawaii cute</span>
+      <h1>Eat the <span class="grad" id="hero-grad">rainbow</span>,<br />every day.</h1>
+      <p class="lede">Chia is the most adorable way to track your phytonutrients, optimize your diet, and build lifelong healthy habits — one colorful plant at a time.</p>
+      <div class="cta-row">
+        <a href="#download" class="store-btn">
+          <svg class="glyph" viewBox="0 0 24 24" fill="#f0f5f0"><path d="M16.4 12.9c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8-.7 0-1.7-.8-2.8-.8-1.5 0-2.8.8-3.6 2.1-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.8-.7s1.6.7 2.8.7c1.1 0 1.9-1 2.6-2 .8-1.2 1.2-2.3 1.2-2.4-.1 0-2.2-.9-2.2-3.3zM14.3 6.2c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.6.6-1 1.6-.9 2.6 1 .1 1.9-.5 2.5-1.2z"/></svg>
+          <span class="lines"><small>Download on the</small><b>App Store</b></span>
+        </a>
+        <a href="#features" class="btn btn-ghost">See how it works →</a>
+      </div>
+      <div class="proof" id="hero-proof"><span class="stars">★★★★★</span> Loved by 12,000+ plant eaters</div>
+    </div>
+
+    <div class="hero-visual reveal in">
+      <div class="blob"></div>
+      <div class="blob orange"></div>
+      <img class="phone-hero" src="assets/Home_transparent.png" alt="Chia home screen showing today's plate, weekly progress and streak" />
+      <div class="float-card float-rainbow">
+        <div class="t">Today's rainbow</div>
+        <div class="dots">
+          <i style="background:var(--red)">2</i>
+          <i style="background:var(--yellow)">0</i>
+          <i style="background:var(--green)">3</i>
+          <i style="background:var(--teal)">1</i>
+          <i style="background:var(--whitebrown);color:var(--text);box-shadow:inset 0 0 0 1px #ddd">6</i>
+        </div>
+      </div>
+      <div class="float-card float-streak">
+        <span style="font-size:30px">🔥</span>
+        <div><div class="big">4 days</div><div class="lbl">Current streak</div></div>
+      </div>
+      <img class="mascot-peek" src="assets/chia-thumbs-up.png" alt="" />
+    </div>
+  </div>
+</section>
+
+<div class="rainbow-strip" aria-hidden="true">
+  <span style="background:var(--red)"></span>
+  <span style="background:var(--yellow)"></span>
+  <span style="background:var(--green)"></span>
+  <span style="background:var(--teal)"></span>
+  <span style="background:var(--whitebrown);box-shadow:inset 0 0 0 1px #eee"></span>
+</div>
+
+<!-- ============ SCIENCE ============ -->
+<section id="science" class="features" style="padding-top:72px">
+  <div class="wrap reveal">
+    <div class="dark">
+      <div class="glow"></div>
+      <div class="glow b"></div>
+      <span class="kicker">The science of 30</span>
+      <h2>Diversity beats <span class="accent">restriction.</span></h2>
+      <p class="dp">Science shows that eating <b style="color:#fff">30 unique plants a week</b> is the golden rule for a thriving gut microbiome, better digestion, and long-term vitality. Chia makes that goal fun, visual, and incredibly rewarding.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">30<span class="u">/wk</span></div><div class="l">Unique plants for a thriving gut microbiome</div></div>
+        <div class="stat"><div class="n">5</div><div class="l">Rainbow color groups to fill on your plate</div></div>
+        <div class="stat"><div class="n">7<span class="u">days</span></div><div class="l">Streaks that turn variety into a lasting habit</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUDIENCE ============ -->
+<section class="audience">
+  <div class="wrap sec-head reveal">
+    <span class="kicker">For every kind of plant eater</span>
+    <h2>Whether you're plant-curious or all-in.</h2>
+    <p>WFPB, vegan, or simply trying to add more veggies to your plate — Chia makes hitting your daily health goals genuinely fun.</p>
+    <div class="pill-row">
+      <span class="apill"><span class="dot" style="background:var(--green)"></span>Whole-Food Plant-Based</span>
+      <span class="apill"><span class="dot" style="background:var(--teal)"></span>Vegan &amp; vegetarian</span>
+      <span class="apill"><span class="dot" style="background:var(--red)"></span>More-veggies-curious</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<div id="features"></div>
+<section class="features">
+  <div class="wrap">
+
+    <!-- 1 Build your plate -->
+    <div class="feature reveal">
+      <div class="f-text">
+        <div class="num">01 — Build your plate</div>
+        <h3>Log every plant on your plate.</h3>
+        <p>Easily add the fruits, veggies, nuts, seeds, and legumes you eat onto your cute digital plate. Search the full botanical library, then tap to record.</p>
+        <ul class="f-list">
+          <li><span class="tick">✓</span>Hundreds of plants, with default color group</li>
+          <li><span class="tick">✓</span>Star your favorites for one-tap access</li>
+          <li><span class="tick">✓</span>Backdate entries to any day you missed</li>
+        </ul>
+      </div>
+      <div class="f-visual">
+        <div class="stage green"></div>
+        <img class="phone tilt-l" src="assets/Add Plants_transparent.png" alt="Add plants to your plate screen with searchable plant list" />
+        <div class="chip-float" style="top:60px; right:8px;"><span class="emoji">🍒</span><div>Cherry<small>added to plate</small></div></div>
+      </div>
+    </div>
+
+    <!-- 2 Magic 30 -->
+    <div class="feature flip reveal">
+      <div class="f-text">
+        <div class="num">02 — The Magic 30</div>
+        <h3>Watch your week bloom to 30.</h3>
+        <p>Track the "Magic 30" — the ultimate gut-health goal of 30 unique plants per week. Your rainbow gauge fills in by color so you always know what's missing.</p>
+        <ul class="f-list">
+          <li><span class="tick">✓</span>Live weekly progress</li>
+          <li><span class="tick">✓</span>See your color balance at a glance</li>
+          <li><span class="tick">✓</span>Gentle nudges toward the colors you skip</li>
+        </ul>
+      </div>
+      <div class="f-visual">
+        <div class="stage teal"></div>
+        <img class="phone tilt-r" src="assets/Weekly_transparent.png" alt="Weekly progress screen with 26 of 30 plants and rainbow gauge" />
+        <div class="chip-float" style="bottom:70px; left:6px;"><span class="emoji">🌈</span><div>26 / 30<small>this week</small></div></div>
+      </div>
+    </div>
+
+    <!-- 3 Rewards -->
+    <div class="feature reveal">
+      <div class="f-text">
+        <div class="num">03 — Earn adorable rewards</div>
+        <h3>Gamify your wellness journey.</h3>
+        <p>Unlock cute rewards and achievements for eating a high variety of plants and hitting your weekly goals. Collect gem-tier produce like the Diamond Dragonfruit.</p>
+        <ul class="f-list">
+          <li><span class="tick">✓</span>Collect trophies across reward tiers</li>
+          <li><span class="tick">✓</span>Confetti moments worth chasing</li>
+          <li><span class="tick">✓</span>Milestones that celebrate real progress</li>
+        </ul>
+      </div>
+      <div class="f-visual">
+        <div class="stage red"></div>
+        <img class="phone tilt-l" src="assets/Rewards_transparents.png" alt="Reward screen showing the Diamond Dragonfruit achievement" />
+        <img src="assets/Golden_Grapes.png" alt="" style="position:absolute; z-index:3; width:108px; top:46px; right:0; filter:drop-shadow(0 14px 20px rgba(41,61,42,.28));" />
+      </div>
+    </div>
+
+    <!-- 4 Trends -->
+    <div class="feature flip reveal">
+      <div class="f-text">
+        <div class="num">04 — Analyze your rainbow</div>
+        <h3>Beautiful charts of your variety.</h3>
+        <p>Dive into easy-to-read charts that track your dietary diversity. See trends over time across the specific colors and plant categories you're fueling your body with.</p>
+        <ul class="f-list">
+          <li><span class="tick">✓</span>Week, month, and year views</li>
+          <li><span class="tick">✓</span>Breakdowns by color and category</li>
+          <li><span class="tick">✓</span>Spot patterns and keep improving</li>
+        </ul>
+      </div>
+      <div class="f-visual">
+        <div class="stage yellow"></div>
+        <img class="phone tilt-r" src="assets/Trends_transparent.png" alt="Trends screen with stacked color bar charts of eating patterns" />
+        <div class="chip-float" style="top:54px; left:0;"><span class="emoji">📊</span><div>+20 plants<small>vs last month</small></div></div>
+      </div>
+    </div>
+
+    <!-- 5 Recipes -->
+    <div class="feature reveal">
+      <div class="f-text">
+        <div class="num">05 — Web recipe saver</div>
+        <h3>All your inspiration, one cozy spot.</h3>
+        <p>Found a delicious, healthy recipe online? Save the link directly into Chia so every bit of culinary inspiration is organized, sorted, and ready when you are.</p>
+        <ul class="f-list">
+          <li><span class="tick">✓</span>Save any recipe link in seconds</li>
+          <li><span class="tick">✓</span>Filter by Breakfast, Entrée, Snack &amp; more</li>
+          <li><span class="tick">✓</span>Swipe to edit or tidy your collection</li>
+        </ul>
+      </div>
+      <div class="f-visual">
+        <div class="stage orange"></div>
+        <img class="phone tilt-l" src="assets/Recipes_transparent.png" alt="Recipes screen with saved plant-based recipes" />
+        <div class="chip-float" style="bottom:64px; right:6px;"><span class="emoji">🥗</span><div>Saved!<small>Green Smoothie</small></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ SMALL FEATURE GRID ============ -->
+<section class="grid-feats">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">More to love</span>
+      <h2>Little touches that keep you going.</h2>
+    </div>
+    <div class="cards3 reveal">
+      <div class="fcard">
+        <div class="ic" style="background:var(--green-faded)">⚡️</div>
+        <h4>Lightning-fast meals</h4>
+        <p>Eat the same superfood smoothie or harvest bowl every day? Save your favorite plant combinations as Meals and add them in bulk with a single tap.</p>
+      </div>
+      <div class="fcard">
+        <div class="ic" style="background:#cdeceb">🌿</div>
+        <h4>Your plant "Life List"</h4>
+        <p>Keep a master collection of every unique plant you've ever recorded. Gotta eat 'em all — build your ultimate botanical diary as you discover exotic new health foods.</p>
+      </div>
+      <div class="fcard">
+        <div class="ic" style="background:#f7d9cf">🔒</div>
+        <h4>Privacy first</h4>
+        <p>All your eating-habit data is yours and yours alone. It lives only on your device — no accounts, no clouds, no selling your salad secrets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRIVACY BAND ============ -->
+<section id="privacy" class="privacy">
+  <div class="wrap reveal">
+    <div class="privacy-band">
+      <div class="lock">🔒</div>
+      <div>
+        <h3>Your data never leaves your phone.</h3>
+        <p>Chia is privacy-first by design. Every plant you log, every streak you build, and every reward you earn stays on your device — because your health journey is nobody's business but yours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section id="download" class="final">
+  <div class="wrap reveal">
+    <div class="dark">
+      <div class="glow"></div>
+      <div class="glow b"></div>
+      <span class="confetti" style="background:var(--red); top:30px; left:18%; transform:rotate(20deg);"></span>
+      <span class="confetti" style="background:var(--yellow); top:64px; left:42%; transform:rotate(-15deg);"></span>
+      <span class="confetti" style="background:var(--teal); top:24px; left:60%; transform:rotate(35deg);"></span>
+      <span class="confetti" style="background:var(--green); bottom:40px; left:30%; transform:rotate(10deg);"></span>
+      <span class="confetti" style="background:#c9a8e0; bottom:60px; left:52%; transform:rotate(-25deg);"></span>
+      <div>
+        <span class="kicker">Start today</span>
+        <h2>Your rainbow is <span class="accent">waiting.</span></h2>
+        <p class="dp">Fuel your longevity, boost your energy, and color your plate. Download Chia and start eating the rainbow.</p>
+        <div class="final-cta">
+          <a href="#" class="store-btn light">
+            <svg class="glyph" viewBox="0 0 24 24" fill="#293d2a"><path d="M16.4 12.9c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8-.7 0-1.7-.8-2.8-.8-1.5 0-2.8.8-3.6 2.1-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.8-.7s1.6.7 2.8.7c1.1 0 1.9-1 2.6-2 .8-1.2 1.2-2.3 1.2-2.4-.1 0-2.2-.9-2.2-3.3zM14.3 6.2c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.6.6-1 1.6-.9 2.6 1 .1 1.9-.5 2.5-1.2z"/></svg>
+            <span class="lines"><small>Download on the</small><b>App Store</b></span>
+          </a>
+        </div>
+        <div class="proof" style="color:#a4c1a5; margin-top:22px;"><span class="stars">★★★★★</span> iPhone &amp; iPad</div>
+      </div>
+      <div class="mascot-big">
+        <img src="assets/chia-hearts.png" alt="Chia mascot with heart eyes" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <a class="brand" href="#top">
+          <span class="mark"><img src="assets/chia-mascot.png" alt="" /></span>
+          Chia
+        </a>
+        <p>The most adorable way to eat the rainbow. Track 30 plants a week, build healthy habits, and color your plate.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h5>App</h5>
+          <a href="#features">Features</a>
+          <a href="#science">The science</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#download">Download</a>
+        </div>
+        <div class="foot-col" id="foot-company">
+          <h5>Company</h5>
+          <a href="#">About</a>
+          <a href="#">Blog</a>
+          <a href="#">Support</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="foot-col">
+          <h5>Legal</h5>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Chia. All rights reserved.</span>
+      <span>Made with 🌱 for happy guts.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // nav shadow on scroll
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 12);
+  onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.14, rootMargin:'0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+
+  /* ---------- Tweaks ---------- */
+  const TWEAKS = /*EDITMODE-BEGIN*/{
+    "showSocialProof": false,
+    "showFooterCompany": false,
+    "rainbowHeadline": true,
+    "phoneTilt": true
+  }/*EDITMODE-END*/;
+
+  function applyTweaks(t) {
+    document.body.classList.toggle('twk-hide-proof', !t.showSocialProof);
+    document.body.classList.toggle('twk-hide-company', !t.showFooterCompany);
+    document.body.classList.toggle('twk-flat-head', !t.rainbowHeadline);
+    document.body.classList.toggle('twk-no-tilt', !t.phoneTilt);
+  }
+  applyTweaks(TWEAKS);
+
+  // Tweaks panel (vanilla host protocol)
+  const TWEAK_CONTROLS = [
+    { section: 'Hero' },
+    { key: 'showSocialProof',   label: 'Social proof row' },
+    { key: 'rainbowHeadline',   label: 'Rainbow headline' },
+    { section: 'Layout' },
+    { key: 'phoneTilt',         label: 'Tilt the phones' },
+    { section: 'Footer' },
+    { key: 'showFooterCompany', label: 'Company column' },
+  ];
+
+  let panelEl = null;
+  function buildPanel() {
+    const p = document.createElement('div');
+    p.className = 'twk-panel';
+    p.setAttribute('data-omelette-chrome', '');
+    const hd = document.createElement('div');
+    hd.className = 'twk-hd';
+    hd.innerHTML = '<b>Tweaks</b>';
+    const x = document.createElement('button');
+    x.className = 'twk-x'; x.textContent = '✕'; x.setAttribute('aria-label', 'Close tweaks');
+    x.onclick = () => { hidePanel(); window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*'); };
+    hd.appendChild(x);
+    p.appendChild(hd);
+    const body = document.createElement('div');
+    body.className = 'twk-body';
+    TWEAK_CONTROLS.forEach(c => {
+      if (c.section) {
+        const s = document.createElement('div');
+        s.className = 'twk-sect'; s.textContent = c.section;
+        body.appendChild(s); return;
+      }
+      const row = document.createElement('div');
+      row.className = 'twk-trow';
+      const lbl = document.createElement('span'); lbl.textContent = c.label;
+      const tog = document.createElement('button');
+      tog.className = 'twk-tog'; tog.type = 'button';
+      tog.setAttribute('role', 'switch');
+      tog.dataset.on = TWEAKS[c.key] ? '1' : '0';
+      tog.setAttribute('aria-checked', String(!!TWEAKS[c.key]));
+      tog.innerHTML = '<i></i>';
+      tog.onclick = () => {
+        const v = !TWEAKS[c.key];
+        TWEAKS[c.key] = v;
+        tog.dataset.on = v ? '1' : '0';
+        tog.setAttribute('aria-checked', String(v));
+        applyTweaks(TWEAKS);
+        window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [c.key]: v } }, '*');
+      };
+      row.appendChild(lbl); row.appendChild(tog);
+      body.appendChild(row);
+    });
+    p.appendChild(body);
+    return p;
+  }
+  function showPanel() { if (!panelEl) panelEl = buildPanel(); if (!panelEl.isConnected) document.body.appendChild(panelEl); }
+  function hidePanel() { if (panelEl && panelEl.isConnected) panelEl.remove(); }
+
+  window.addEventListener('message', (e) => {
+    const t = e && e.data && e.data.type;
+    if (t === '__activate_edit_mode') showPanel();
+    else if (t === '__deactivate_edit_mode') hidePanel();
+  });
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+</script>
+</body>
+</html>

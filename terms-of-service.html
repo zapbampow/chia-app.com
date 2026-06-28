@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chia — Terms of Use</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:#fefde8; --bg-warm:#f6f4e0; --card:#f2f1d4; --card-2:#fffffb;
+    --text:#3e5b3f; --muted:#537954; --soft:#6b8169; --faint:#8a9a88;
+    --ink:#48634a; --line:#e6e6c8;
+    --red:#f26849; --yellow:#f2cf63; --green:#9cbf4e; --teal:#4ac8c7; --whitebrown:#fffffb;
+    --header-green:#a9c859; --green-faded:#cedfaa;
+    --av-500:#679869; --av-600:#537954; --av-700:#3e5b3f; --av-800:#293d2a; --av-900:#151e15;
+    --acc-yellow:#ffdf68; --acc-green:#56872e; --orange:#e87048;
+    --e1:0 1px 3px rgba(62,91,63,.12);
+    --e2:0 6px 16px rgba(62,91,63,.16);
+    --e3:0 22px 44px rgba(62,91,63,.22);
+    --spring:cubic-bezier(.34,1.56,.64,1);
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family:"Poppins",system-ui,sans-serif; background:var(--bg); color:var(--text);
+    -webkit-font-smoothing:antialiased; overflow-x:hidden; line-height:1.5;
+  }
+  a { color:inherit; text-decoration:none; }
+  img { display:block; max-width:100%; }
+  .wrap { max-width:1140px; margin:0 auto; padding:0 32px; }
+
+  /* ---------- nav ---------- */
+  header.nav { position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.1) blur(8px);
+    background:rgba(254,253,232,.82); border-bottom:1px solid transparent; transition:border-color .3s, box-shadow .3s; }
+  header.nav.scrolled { border-color:var(--line); box-shadow:0 2px 14px rgba(62,91,63,.07); }
+  .nav-inner { display:flex; align-items:center; justify-content:space-between; height:72px; }
+  .brand { display:flex; align-items:center; gap:11px; font-weight:800; font-size:23px; letter-spacing:-.02em; }
+  .brand .mark { width:40px; height:40px; border-radius:50%; background:rgba(156,191,78,.30);
+    border:2px solid var(--green); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 0 2px var(--acc-yellow), 0 0 0 4px var(--acc-green); }
+  .brand .mark img { width:30px; height:30px; }
+  .nav-links { display:flex; align-items:center; gap:30px; font-size:15px; font-weight:500; color:var(--muted); }
+  .nav-links a { transition:color .2s; }
+  .nav-links a:hover { color:var(--text); }
+  .nav-cta { background:var(--av-500); color:#fff; padding:10px 22px; border-radius:9999px; font-weight:600; font-size:14px;
+    box-shadow:0 4px 12px rgba(62,91,63,.20); transition:transform .18s var(--spring); }
+  .nav-cta:active { transform:scale(.95); }
+
+  /* ---------- document ---------- */
+  .doc { max-width:820px; margin:0 auto; padding:18px 32px 84px; }
+  .crumb { display:inline-flex; align-items:center; gap:7px; margin-top:28px; font-size:14px; font-weight:600;
+    color:var(--muted); transition:color .2s; }
+  .crumb:hover { color:var(--text); }
+  .doc-head { margin-top:18px; padding-bottom:26px; border-bottom:1px solid var(--line); }
+  .doc-head .eyebrow { display:inline-flex; align-items:center; gap:8px; background:var(--card); color:var(--muted);
+    padding:7px 15px; border-radius:9999px; font-size:13px; font-weight:600; box-shadow:var(--e1); white-space:nowrap; }
+  .doc-head h1 { font-size:clamp(34px,5vw,52px); font-weight:800; letter-spacing:-.03em; line-height:1.04; margin:18px 0 0; }
+  .updated { color:var(--faint); font-size:14.5px; font-weight:500; margin-top:14px; }
+
+  .lead { font-size:18px; line-height:1.72; color:var(--ink); margin-top:22px; }
+  .lead a, .lead strong { font-weight:600; color:var(--text); }
+
+  .sec-h { display:flex; align-items:center; gap:16px; margin:48px 0 18px; }
+  .sec-num { width:42px; height:42px; flex:none; border-radius:13px; background:var(--av-500); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700;
+    box-shadow:0 0 0 2px var(--acc-yellow), 0 0 0 4px rgba(86,135,46,.55); }
+  .sec-h h2 { font-size:clamp(21px,2.6vw,26px); font-weight:700; letter-spacing:-.02em; line-height:1.15; }
+
+  p.body { font-size:17px; line-height:1.72; color:var(--ink); margin-bottom:14px; }
+
+  ul.bullets { list-style:none; display:flex; flex-direction:column; gap:14px; margin:6px 0 8px; }
+  ul.bullets li { position:relative; display:flex; gap:14px; background:var(--card-2); border:1px solid var(--green-faded);
+    border-radius:18px; padding:18px 20px; box-shadow:var(--e1); }
+  ul.bullets li .mk { width:11px; height:11px; flex:none; border-radius:50%; margin-top:7px; }
+  ul.bullets li .bx strong { display:block; font-size:16.5px; font-weight:700; color:var(--text); letter-spacing:-.01em; }
+  ul.bullets li .bx span { display:block; font-size:16px; line-height:1.65; color:var(--ink); margin-top:5px; }
+
+  .links { display:flex; flex-direction:column; gap:12px; margin:8px 0 4px; padding-left:2px; }
+  .links a { display:inline-flex; align-items:center; gap:9px; font-size:16.5px; font-weight:600; color:var(--av-500);
+    width:fit-content; transition:gap .18s var(--spring), color .2s; }
+  .links a:hover { color:var(--av-700); gap:13px; }
+  .links a .ar { font-size:14px; }
+
+  .doc-foot-note { margin-top:48px; padding:22px 24px; background:var(--card); border-radius:20px;
+    font-size:15px; color:var(--muted); line-height:1.6; }
+
+  /* ---------- footer ---------- */
+  footer { padding:48px 0 56px; border-top:1px solid var(--line); }
+  .foot-inner { display:flex; align-items:flex-start; justify-content:space-between; gap:40px; flex-wrap:wrap; }
+  .foot-brand { max-width:300px; }
+  .foot-brand p { color:var(--soft); font-size:14px; margin-top:14px; line-height:1.6; }
+  .foot-cols { display:flex; gap:64px; flex-wrap:wrap; }
+  .foot-col h5 { font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--faint); font-weight:700; }
+  .foot-col a { display:block; color:var(--muted); font-size:15px; margin-top:12px; font-weight:500; transition:color .2s; }
+  .foot-col a:hover { color:var(--text); }
+  .foot-bottom { display:flex; align-items:center; justify-content:space-between; margin-top:40px; padding-top:24px;
+    border-top:1px solid var(--line); font-size:13px; color:var(--faint); flex-wrap:wrap; gap:12px; }
+
+  /* ---------- reveal ---------- */
+  .reveal { opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s var(--spring); }
+  .reveal.in { opacity:1; transform:none; }
+
+  @media (max-width:920px) {
+    .nav-links a:not(.nav-cta) { display:none; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .reveal { opacity:1 !important; transform:none !important; }
+    html { scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <span class="mark"><img src="assets/chia-mascot.png" alt="Chia mascot" /></span>
+      Chia
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#science">The science</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#privacy">Privacy</a>
+      <a href="index.html#download" class="nav-cta">Get the app</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ DOCUMENT ============ -->
+<main class="doc">
+  <a class="crumb" href="index.html">← Back to home</a>
+
+  <div class="doc-head reveal in">
+    <span class="eyebrow">📄 The fine print</span>
+    <h1>Terms of Use for Chia</h1>
+    <div class="updated">Last Updated: March 20, 2026</div>
+  </div>
+
+  <p class="lead reveal in">This Terms of Use ("Agreement") is a legal agreement between you ("User" or "you") and Third Story Studios ("we," "us," or "our") for the use of the Chia mobile application ("App"). By downloading, installing, or using the App, you agree to be bound by the terms of this Agreement. This document includes our End User License Agreement.</p>
+
+  <!-- 1 -->
+  <div class="reveal">
+    <div class="sec-h"><span class="sec-num">1</span><h2>License Grant</h2></div>
+    <p class="body">Third Story Studios grants you a personal, non-exclusive, non-transferable, non-sublicensable, and revocable license to use the Chia App on any compatible device that you own or control, strictly for your personal, non-commercial purposes.</p>
+  </div>
+
+  <!-- 2 -->
+  <div class="reveal">
+    <div class="sec-h"><span class="sec-num">2</span><h2>Restrictions on Use</h2></div>
+    <p class="body">You agree not to:</p>
+    <ul class="bullets">
+      <li><span class="mk" style="background:var(--red)"></span><div class="bx"><span>Decompile, reverse engineer, or attempt to derive the source code of the App.</span></div></li>
+      <li><span class="mk" style="background:var(--yellow)"></span><div class="bx"><span>Modify, adapt, or create derivative works based on the App.</span></div></li>
+      <li><span class="mk" style="background:var(--green)"></span><div class="bx"><span>Use the App for any unlawful purpose or in violation of any local, state, or international laws.</span></div></li>
+      <li><span class="mk" style="background:var(--teal)"></span><div class="bx"><span>Remove or obscure any copyright, trademark, or other proprietary notices contained in the App.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- 3 -->
+  <div class="reveal">
+    <div class="sec-h"><span class="sec-num">3</span><h2>Intellectual Property</h2></div>
+    <p class="body">The App, including its original content (excluding third-party web content), features, artwork, and functionality, are and will remain the exclusive property of Third Story Studios. The App is protected by copyright, trademark, and other laws of both the United States and foreign countries.</p>
+  </div>
+
+  <!-- 4 -->
+  <div class="reveal">
+    <div class="sec-h"><span class="sec-num">4</span><h2>Third-Party Content and External Links</h2></div>
+    <p class="body">The App allows you to view recipes and other resources via an in-app web view.</p>
+    <ul class="bullets">
+      <li><span class="mk" style="background:var(--teal)"></span><div class="bx"><strong>No Ownership</strong><span>These external resources are owned by their respective creators.</span></div></li>
+      <li><span class="mk" style="background:var(--orange)"></span><div class="bx"><strong>No Responsibility</strong><span>Third Story Studios does not control and is not responsible for the content, privacy policies, or practices of any third-party websites.</span></div></li>
+      <li><span class="mk" style="background:var(--yellow)"></span><div class="bx"><strong>Availability</strong><span>Access to these resources requires an active internet connection. We do not guarantee that third-party content will always be available or accurate.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- 5 -->
+  <div class="reveal">
+    <div class="sec-h"><span class="sec-num">5</span><h2>Disclaimer of Medical/Nutritional Advice</h2></div>
+    <p class="body">The information provided within Chia (including recipes accessed via web view) is for informational purposes only.</p>
+    <ul class="bullets">
+      <li><span class="mk" style="background:var(--red)"></span><div class="bx"><span>Chia does not provide medical or nutritional advice.</span></div></li>
+      <li><span class="mk" style="background:var(--yellow)"></span><div class="bx"><span>You should consult with a healthcare professional before starting any new diet or if you have specific food allergies or medical conditions.</span></div></li>
+      <li><span class="mk" style="background:var(--green)"></span><div class="bx"><span>Reliance on any information provided by the App or external web resources is solely at your own risk.</span></div></li>
+    </ul>
+  </div>
+
+  <!-- 6 -->
+  <div class="reveal">
+    <div class="sec-h"><span class="sec-num">6</span><h2>Limitation of Liability</h2></div>
+    <p class="body">To the maximum extent permitted by applicable law, Third Story Studios shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of data, personal injury, or property damage resulting from your use of or inability to use the App.</p>
+  </div>
+
+  <!-- 7 -->
+  <div class="reveal">
+    <div class="sec-h"><span class="sec-num">7</span><h2>"As Is" and "As Available" Disclaimer</h2></div>
+    <p class="body">The App is provided to you "AS IS" and "AS AVAILABLE" and with all faults and defects without warranty of any kind. Third Story Studios disclaims all warranties, whether express, implied, or statutory, regarding the App.</p>
+  </div>
+
+  <!-- 8 -->
+  <div class="reveal">
+    <div class="sec-h"><span class="sec-num">8</span><h2>Termination</h2></div>
+    <p class="body">This Agreement is effective until terminated by you or Third Story Studios. Your rights under this license will terminate automatically without notice if you fail to comply with any terms of this Agreement. Upon termination, you must cease all use of the App and delete all copies from your devices.</p>
+  </div>
+
+  <!-- 9 -->
+  <div class="reveal">
+    <div class="sec-h"><span class="sec-num">9</span><h2>Governing Law</h2></div>
+    <p class="body">This Agreement shall be governed by and construed in accordance with the laws of the jurisdiction in which Third Story Studios operates, without regard to its conflict of law provisions.</p>
+  </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <a class="brand" href="index.html">
+          <span class="mark"><img src="assets/chia-mascot.png" alt="" /></span>
+          Chia
+        </a>
+        <p>The most adorable way to eat the rainbow. Track 30 plants a week, build healthy habits, and color your plate.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h5>App</h5>
+          <a href="index.html#features">Features</a>
+          <a href="index.html#science">The science</a>
+          <a href="index.html#privacy">Privacy</a>
+          <a href="index.html#download">Download</a>
+        </div>
+        <div class="foot-col">
+          <h5>Legal</h5>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Chia. All rights reserved.</span>
+      <span>Made with 🌱 for happy guts.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 12);
+  onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.12, rootMargin:'0px 0px -6% 0px' });
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
