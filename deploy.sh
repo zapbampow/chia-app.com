@@ -1,0 +1,1 @@
+rsync -av --exclude='.git' --exclude='.gitignore' --exclude='deploy.sh' /path/to/your/repo/ /var/www/chia-app.com/
