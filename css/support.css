@@ -1,0 +1,81 @@
+/* ==========================================================================
+   support.css — styles unique to support.html.
+   Depends on shared.css for tokens, reset, nav, buttons, rainbow divider,
+   footer, reveal, and shared responsive / reduced-motion rules.
+   ========================================================================== */
+
+/* ---------- page header ---------- */
+.support-hero { padding:64px 0 20px; text-align:center; }
+.support-hero .eyebrow { display:inline-flex; align-items:center; gap:8px; background:var(--card); color:var(--muted);
+  padding:8px 16px; border-radius:9999px; font-size:13.5px; font-weight:600; box-shadow:var(--e1); }
+.support-hero h1 { font-size:clamp(38px,5.4vw,60px); line-height:1.02; font-weight:800; letter-spacing:-.035em; margin:20px 0 0; }
+.support-hero p { font-size:18.5px; line-height:1.6; color:var(--muted); margin:20px auto 0; max-width:560px; }
+
+/* ---------- steps ---------- */
+.steps { padding:48px 0 24px; }
+.steps-intro { text-align:center; max-width:620px; margin:0 auto 8px; }
+.steps-intro .kicker { display:inline-block; font-size:13px; font-weight:700; text-transform:uppercase;
+  letter-spacing:.12em; color:var(--av-500); }
+.steps-intro h2 { font-size:clamp(28px,4vw,42px); font-weight:800; letter-spacing:-.03em; line-height:1.05; margin-top:12px; }
+
+.step { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; padding:48px 0; }
+.step.flip .step-text { order:2; }
+.step.flip .step-visual { order:1; }
+
+.step-text .badge { display:inline-flex; align-items:center; justify-content:center; width:48px; height:48px;
+  border-radius:50%; background:var(--av-500); color:#fff; font-size:22px; font-weight:800; box-shadow:var(--e2); }
+.step-text h3 { font-size:clamp(26px,3.4vw,36px); font-weight:800; letter-spacing:-.025em; line-height:1.08; margin-top:20px; }
+.step-text p { font-size:18px; color:var(--muted); line-height:1.62; margin-top:16px; max-width:440px; }
+.step-text .hint { display:flex; align-items:flex-start; gap:12px; margin-top:22px; background:var(--card-2);
+  border:1px solid var(--green-faded); border-radius:18px; padding:16px 18px; font-size:15px; color:var(--text);
+  font-weight:500; max-width:440px; box-shadow:var(--e1); }
+.step-text .hint .ic { flex:none; font-size:20px; line-height:1.2; }
+
+.step-visual { position:relative; display:flex; align-items:center; justify-content:center; min-height:600px; }
+.step-visual .stage { position:absolute; width:380px; height:380px; border-radius:42% 58% 58% 42% / 50% 50% 50% 50%;
+  top:50%; left:50%; transform:translate(-50%,-50%); z-index:0; }
+.stage.green { background:radial-gradient(circle at 34% 30%, var(--green-faded), var(--header-green)); }
+.stage.teal { background:radial-gradient(circle at 34% 30%, #b6e9e8, var(--teal)); }
+
+/* pre-framed phone screenshot */
+.phone-img { position:relative; z-index:2; width:280px; filter:drop-shadow(0 26px 44px rgba(41,61,42,.30)); }
+.phone-img.tilt-l { transform:rotate(-3deg); }
+.phone-img.tilt-r { transform:rotate(3deg); }
+
+/* marker pointing at the tapped UI */
+.tap-marker { position:absolute; z-index:4; display:flex; align-items:center; gap:10px;
+  background:var(--card-2); border-radius:14px; padding:10px 14px; box-shadow:var(--e3); font-weight:700; font-size:14px; }
+.tap-marker .dot { width:30px; height:30px; border-radius:50%; background:var(--av-500); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:16px; flex:none; }
+.tap-marker small { display:block; font-size:11px; color:var(--faint); font-weight:600; }
+
+/* ---------- contact band ---------- */
+.contact { padding:24px 0 72px; }
+.contact-band { background:var(--av-900); color:#f0f5f0; border-radius:32px; padding:52px 56px;
+  position:relative; overflow:hidden; display:grid; grid-template-columns:1.3fr .7fr; gap:32px; align-items:center; }
+.contact-band .glow { position:absolute; width:440px; height:440px; border-radius:50%;
+  background:radial-gradient(circle, rgba(169,200,89,.30), transparent 70%); top:-180px; right:-120px; }
+.contact-band .kicker { display:inline-block; font-size:13px; font-weight:700; text-transform:uppercase;
+  letter-spacing:.12em; color:var(--header-green); position:relative; }
+.contact-band h2 { font-size:clamp(28px,4vw,42px); font-weight:800; letter-spacing:-.03em; line-height:1.06;
+  margin-top:12px; position:relative; }
+.contact-band h2 .accent { color:var(--yellow); }
+.contact-band p { color:#c2d6c3; font-size:18px; line-height:1.6; margin-top:16px; max-width:480px; position:relative; }
+.contact-band .mail { display:inline-flex; align-items:center; gap:12px; margin-top:26px; background:var(--acc-yellow);
+  color:var(--av-800); padding:14px 26px; border-radius:9999px; font-weight:700; font-size:17px; position:relative;
+  box-shadow:0 10px 22px rgba(0,0,0,.22); transition:transform .18s var(--spring), box-shadow .2s; }
+.contact-band .mail:hover { transform:translateY(-2px); box-shadow:0 14px 28px rgba(0,0,0,.28); }
+.contact-band .mail:active { transform:scale(.96); }
+.contact-band .mascot { position:relative; justify-self:center; }
+.contact-band .mascot img { width:200px; filter:drop-shadow(0 22px 30px rgba(0,0,0,.34)); }
+
+/* ---------- responsive ---------- */
+@media (max-width:920px) {
+  .step { grid-template-columns:1fr; gap:20px; padding:36px 0; }
+  .step.flip .step-text { order:1; } .step.flip .step-visual { order:2; }
+  .step-visual { min-height:520px; }
+  .step-text p, .step-text .hint { max-width:none; }
+  .contact-band { grid-template-columns:1fr; padding:40px 28px; text-align:center; }
+  .contact-band p { margin-left:auto; margin-right:auto; }
+  .contact-band .mascot { display:none; }
+}
