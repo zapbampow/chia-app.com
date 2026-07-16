@@ -45,12 +45,10 @@
     --spring:cubic-bezier(.34,1.56,.64,1);
   }
   * { box-sizing:border-box; margin:0; padding:0; }
-  html { scroll-behavior:smooth; }
+  html { scroll-behavior:smooth; overflow-x:clip; }
   body {
     font-family:"Poppins",system-ui,sans-serif; background:var(--bg); color:var(--text);
-    -webkit-font-smoothing:antialiased; overflow-x:hidden; line-height:1.5;
-    overflow-x: hidden;
-    max-width: 100vw;
+    -webkit-font-smoothing:antialiased; overflow-x:clip; line-height:1.5;
   }
   p { text-wrap: pretty; }
   a { color:inherit; text-decoration:none; }
